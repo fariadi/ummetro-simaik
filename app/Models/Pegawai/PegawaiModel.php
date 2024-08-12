@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Ref\WilayahModel;
 use App\Models\User as UserMentor;
+use App\Models\Bbq\MentorModel;
 
 class PegawaiModel extends Model
 {
@@ -59,6 +60,11 @@ class PegawaiModel extends Model
     public function mentor()
     {
         return $this->belongsTo(UserMentor::class, 'mentor_user_id', 'id');
+    }
+
+    public function mentor_bbq()
+    {
+        return $this->belongsTo(MentorModel::class, 'id', 'pegawai_id');
     }
 
 }

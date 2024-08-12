@@ -38,7 +38,7 @@ $configData = Helper::appClasses();
 @section('page-script')
 <script src="{{asset('assets/js/extended-ui-perfect-scrollbar.js')}}"></script>
 <script src="{{asset('assets/js/libs/form-data-json.min.js')}}"></script>
-<script src="{{asset('assets/js/users/pages-users-table.js')}}"></script>
+<script src="{{asset('assets/js/users/pages-users-table.js?ver=1.1.0')}}"></script>
 <script src="{{asset('assets/js/users/modal-users-roles.js')}}"></script>
 <script src="{{asset('assets/js/users/modal-mentor-add.js')}}"></script>
 @endsection
@@ -59,7 +59,8 @@ $configData = Helper::appClasses();
               <th>NAMA LENGKAP - EMAIL</th>
               <th>NO.HP - ALAMAT</th>
               <th>AKSES</th>
-              <th>Actions</th>
+              <th>MENTOR</th>
+              <th>AKSI</th>
             </tr>
           </thead>
         </table>

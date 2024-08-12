@@ -47,6 +47,7 @@ class UsersRepository implements UsersInterface
                         ->orWhere('username', 'LIKE', "%{$search}%");
                  })
                 ->with('roles')
+                ->with('pegawai.mentor_bbq.mentor')
                 ->where($keys)
                 ->whereHas('roles', function($q) use ($roles) {
                   if(!empty($roles)) $q->where($roles);

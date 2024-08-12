@@ -26,7 +26,8 @@ $(function () {
         { data: '' },
         { data: 'name' },
         { data: 'created_at' },
-        { data: 'name' },
+        { data: '' },
+        { data: '' },
         { data: 'action' }
       ],
       order: [[1, 'desc']],
@@ -120,14 +121,16 @@ $(function () {
           orderable: false,
           render: function (data, type, full, meta) {
             /* var tglLhr = moment(full.tgl_lahir, "YYYY-MM-DD", 'id').format("DD-MMM-YYYY"); */
+            var jalan  = (full.jln) ? full.jln : '';
+            var alamat = (jalan.length > 10) ? jalan.substring(0,20) + ' ...' : jalan;
             var $row_output =
               '<div class="d-flex justify-content-start align-items-center">' +
               ' <div class="d-flex flex-column">' +
-              '<span class="fw-semibold">' +
+              '<span class="fw-lighter">' +
               full.telepon_seluler +
               '</span>' +
               '<small class="text-truncate text-muted"> Alamat. ' +
-              full.jln +
+              alamat +
               '</small>' +
               '</div>' +
               '</div>';
@@ -151,6 +154,23 @@ $(function () {
               $roles +
               '<small class="text-truncate text-muted"> Tanggal. ' +
               tglReg +
+              '</small>' +
+              '</div>' +
+              '</div>';
+            return $row_output;
+          }
+        },
+        {
+          targets: 4,
+          searchable: false,
+          orderable: false,
+          render: function (data, type, full, meta) {
+            var mentor = full.pegawai?.mentor_bbq?.mentor || { name	: '' };
+            var $row_output =
+              '<div class="d-flex justify-content-start align-items-center">' +
+              ' <div class="d-flex flex-column">' + mentor.name +
+              '<small class="text-truncate text-muted">' +
+
               '</small>' +
               '</div>' +
               '</div>';
