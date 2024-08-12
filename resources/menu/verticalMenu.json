@@ -1,0 +1,85 @@
+{
+  "menu": [
+    {
+      "url": "/",
+      "name": "Dashboard",
+      "icon": "menu-icon tf-icons ti ti-dashboard",
+      "slug": "pages-home"
+    }
+  ],
+  "mentor": [
+    {
+      "url": "mentor",
+      "name": "Dashboard",
+      "icon": "menu-icon tf-icons ti ti-dashboard",
+      "slug": "page.asesor"
+    }
+  ],
+  "admin": [
+    {
+      "url": "dashboard",
+      "name": "Dashboard",
+      "icon": "menu-icon tf-icons ti ti-dashboard",
+      "slug": "pages-home"
+    },
+    {
+      "name": "Admin Manager",
+      "icon": "menu-icon tf-icons ti ti-table-options",
+      "slug": ["pages.users", "page.pegawai", "page.wilayah", "page.alquran"],
+      "submenu": [
+        {
+          "url": "/users",
+          "icon": "menu-icon tf-icons ti ti-users",
+          "name": "Data Users",
+          "slug": "pages.users"
+        },
+        {
+          "url": "/page/pegawai",
+          "name": "Pegawai",
+          "icon": "menu-icon tf-icons ti ti-users",
+          "slug": "page.pegawai"
+        },
+        {
+          "url": "/page/alquran",
+          "name": "Surah Al-qur'an",
+          "icon": "menu-icon tf-icons ti ti-file",
+          "slug": "page.alquran"
+        },
+        {
+          "url": "/page/wilayah",
+          "name": "Wilayah",
+          "icon": "menu-icon tf-icons ti ti-file",
+          "slug": "page.wilayah"
+        }
+      ]
+    },
+    {
+      "name": "Report",
+      "icon": "menu-icon tf-icons ti ti-table-options",
+      "slug": "dashboard",
+      "submenu": [
+        {
+          "url": "/page/hafalan-surah",
+          "icon": "menu-icon tf-icons ti ti-users",
+          "name": "Hafalan surah",
+          "slug": "page.hafalan-surah"
+        }
+      ]
+    },
+    {
+      "url": "pages/misc-error",
+      "name": "Blank",
+      "icon": "menu-icon tf-icons ti ti-alert-triangle",
+      "slug": "pages-misc-error",
+      "target": "_blank"
+    }
+  ],
+  "peserta": [
+    {
+      "url": "home",
+      "name": "Dashboard",
+      "icon": "menu-icon tf-icons ti ti-dashboard",
+      "slug": "pages-home"
+    }
+  ]
+}
