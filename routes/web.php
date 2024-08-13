@@ -61,7 +61,7 @@ Route::get('/auth/google', [GoogleController::class, 'redirectToProvider'])->nam
 Route::get('/auth/google/callback', [GoogleController::class, 'handleProviderCallback'])->name('auth-google-callback');
 
 Route::get('/', [HomePage::class,'index'])
-  ->middleware(['role:admin,peserta'])
+  ->middleware(['role:admin,peserta,asesor'])
   ->name('pages-home');
 
 
