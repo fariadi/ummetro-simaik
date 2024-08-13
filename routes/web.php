@@ -101,7 +101,7 @@ Route::get('/json/wil/kab', [WilayahController::class, 'kabupaten'])->middleware
 Route::get('/json/wil/kec', [WilayahController::class, 'kecamatan'])->middleware(['peserta'])->name('get.json.wil.kec');
 Route::get('/json/alquran/{id}', [AlquranController::class, 'show'])->middleware(['role:admin,peserta'])->name('get.json.alquran.id');
 
-Route::put('/json/pegawai/{id}/ranting', [BiodataController::class, 'rantingUpdate'])->middleware(['role:admin,peserta'])->name('put.json.pegawai.id.ranting');
+Route::put('/json/pegawai/{id}/ranting', [BiodataController::class, 'rantingUpdate'])->middleware(['role:admin,peserta,asesor'])->name('put.json.pegawai.id.ranting');
 Route::put('/json/users/{id}/role', [UsersController::class, 'updateRoles'])->middleware(['role:admin'])->name('put.json.users.role');
 Route::put('/json/alquran/{id}', [AlquranController::class, 'update'])->middleware(['role:admin'])->name('put.json.alquran.id');
 Route::put('/json/mentor/{id}', [MentorController::class, 'update'])->middleware(['role:admin'])->name('put.json.mentor.id');
