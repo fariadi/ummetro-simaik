@@ -18,10 +18,12 @@ document.addEventListener('DOMContentLoaded', function (e) {
             dropdownParent: $('#card-ranting'),
             dropdownCssClass: 'no-index',
             ajax: {
-              url: `${baseUrl}dataTableJson/alquran`,
+              url: `${baseUrl}dataTableJson/alquran?order[0][column]=1&order[0][dir]=desc`,
               data: function (params) {
                 var query = {
                   search: params.term,
+                  length:1000
+                  
                   /*roles_id: 3*/
                 }
                 return query;

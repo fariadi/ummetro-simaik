@@ -84,7 +84,7 @@ class AlquranController extends Controller
       $search  = ($request->input('search')) 
         ? $request->input('search') 
         : '';
-      $search  = (is_array($search)) 
+      $search  = (is_array($search))
         ? $search['value'] 
         : $search;
       $orderField = isset($colOrder[$request->input('order.0.column')])

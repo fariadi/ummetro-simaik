@@ -43,7 +43,7 @@ $registered = false;
 @endsection
 
 @section('page-script')
-<script src="{{asset('assets/js/front/pages-bbq-create.js')}}"></script>
+<script src="{{asset('assets/js/front/pages-bbq-create.js?ver=1.1.0')}}"></script>
 <script>
   var pegawaiId = "{{ $pegawai->id }}";
 </script>

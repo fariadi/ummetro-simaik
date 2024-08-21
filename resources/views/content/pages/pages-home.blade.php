@@ -44,7 +44,7 @@ $pegawai = $biodataRepository->firstWithUser($profil->id);
 <script src="{{asset('assets/js/libs/form-data-json.min.js')}}"></script>
 <script src="{{asset('assets/js/front/pages-home.js')}}"></script>
 <script src="{{asset('assets/js/front/pages-bbq-tables.js')}}"></script>
-<script src="{{asset('assets/js/front/modal-aktivitas-ranting-add.js')}}"></script>
+<script src="{{asset('assets/js/front/modal-aktivitas-ranting-add.js?ver=1.1.0')}}"></script>
 <script src="{{asset('assets/js/users/modal-foto-add.js')}}"></script>
 
 @endsection
@@ -160,8 +160,10 @@ $pegawai = $biodataRepository->firstWithUser($profil->id);
               <dl class="row mt-2">
                 <dt class="col-sm-3">Nama Ranting</dt>
                 <dd class="col-sm-9">
-                  {{ ($pegawai->ranting_tingkat === 'ranting') ? strtoupper($pegawai->ranting_tingkat . ' '. $pegawai->rantingKec->nama) : '' }}
-                  {{ ($pegawai->ranting_tingkat === 'cabang') ? strtoupper($pegawai->ranting_tingkat . ' '. $pegawai->rantingKab->nama) : '' }}
+                  {{ $rantingKec = ($pegawai->rantingKec) ? $pegawai->rantingKec->nama : '' }}
+                  {{ $rantingKab = ($pegawai->rantingKab) ? $pegawai->rantingKab->nama : '' }}
+                  {{ ($pegawai->ranting_tingkat === 'ranting') ? strtoupper($pegawai->ranting_tingkat . ' '. $rantingKec) : '' }}
+                  {{ ($pegawai->ranting_tingkat === 'cabang') ? strtoupper($pegawai->ranting_tingkat . ' '. $rantingKab) : '' }}
                 </dd>
                 <dt class="col-sm-3">Tingkat</dt>
                 <dd class="col-sm-9">{{ ($pegawai->ranting_tingkat) ? strtoupper($pegawai->ranting_tingkat) : 'Tidak ada' }}</dd>
