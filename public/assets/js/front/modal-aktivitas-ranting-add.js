@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
                 success: function (status) {
                     Swal.fire({
                         icon: 'success',
-                        title: `Goog Job!`,
+                        title: `Good Job!`,
                         text: `Data aktifitas berhasil simpan.`,
                         customClass: {
                         confirmButton: 'btn btn-success'
