@@ -27,6 +27,19 @@ class BbqregController extends Controller
     }
   }
 
+  public function show(BbqregRepository $bbqregRepository, $id): JsonResponse
+  {
+    try {
+      $data = $bbqregRepository->getByID($id);
+      if (is_null($data)) {
+        return $this->responseError(null, 'Data Not Found', Response::HTTP_NOT_FOUND);
+      }
+      return $this->responseSuccess($data, 'Ok !');
+    } catch (\Exception $e) {
+      return $this->responseError(null, $e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
+    }
+  }
+
   public function dataTableJson(Request $request, BbqregRepository $bbqregRepository)
   {
     try {
@@ -36,7 +49,7 @@ class BbqregController extends Controller
       ];
       $filterField = [
         'pegawai_id' => 'pegawai_id',
-        'mentor_user_id' => 'mentor_user_id'
+        'mentor_user_id' => 'mentor_user_id',
       ];
       $search  = ($request->input('search')) 
         ? $request->input('search') 
@@ -47,12 +60,14 @@ class BbqregController extends Controller
       $orderField = isset($colOrder[$request->input('order.0.column')])
         ? $colOrder[$request->input('order.0.column')]
         : null;
+      $isFiltered = RequestFilterHelper::fieldKey($filterField, $request->all());
+      $isFiltered[] = ['mentor_validasi', '=', null];
       $whereKeys = [
         'order'  => !empty($orderField) ? [$orderField, $request->input('order.0.dir')] : ['id', 'ASC'],
         'limit'  => $request->input('length'),
         'start'  => $request->input('start'),
         'search' => $search,
-        'data'   => RequestFilterHelper::fieldKey($filterField, $request->all()),
+        'data'   => $isFiltered,
       ];
 
       return response()->json([
@@ -60,7 +75,7 @@ class BbqregController extends Controller
         'recordsTotal' => $bbqregRepository->totAll($whereKeys),
         'recordsFiltered' => $bbqregRepository->countFiltered($whereKeys),
         'code' => 200,
-        'data' => $bbqregRepository->limitFiltered($whereKeys),
+        'data' => $bbqregRepository->limitFiltered($whereKeys)
       ]);
     } catch (\Exception $e) {
       return response()->json(
@@ -93,8 +108,6 @@ class BbqregController extends Controller
     }
   }
 
-  
-
   public function pertemuanUpdate(PertemuanStore $request, BbqregRepository $bbqregRepository, $id)
   {
     try {
@@ -108,5 +121,22 @@ class BbqregController extends Controller
       return $this->responseError(null, $e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
     }
   }
+
+  public function mentorValidasi(Request $request, BbqregRepository $bbqregRepository, $id)
+  {
+    try {
+      $value = $request->only(['mentor_validasi']);
+      $data = $bbqregRepository->update($id, $value);
+      if (is_null($data)) {
+        return $this->responseError(null, 'Not Found', Response::HTTP_NOT_FOUND);
+      }
+
+      return $this->responseSuccess($data, 'Ok !');
+    } catch (\Exception $e) {
+      return $this->responseError(null, $e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  
 
 }

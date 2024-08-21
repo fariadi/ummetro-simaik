@@ -18,7 +18,7 @@ class BbqregRepository implements ModelInterface
 
   public function getByID($id): Model|null
   {
-    return Model::find($id);
+    return Model::with('pegawai')->with('surah')->find($id);
   }
 
   public function create(array $data): Model

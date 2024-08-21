@@ -118,7 +118,7 @@ $registered = false;
         </div>
         <div class="col-md-7 order-md-1 order-0">
           <div class="text-center mt-4 mx-3 mx-md-0">
-            <img src="{{asset('assets/img/illustrations/girl-with-laptop.png')}}" class="img-fluid" alt="Api Key Image" width="202">
+            <img src="{{asset('assets/img/illustrations/muslim-couple.jpg')}}" class="img-fluid" alt="Image" width="70%">
           </div>
         </div>
       </div>

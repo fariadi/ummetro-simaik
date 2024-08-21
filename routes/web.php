@@ -100,12 +100,14 @@ Route::get('/json/wil/prov', [WilayahController::class, 'prov'])->middleware(['p
 Route::get('/json/wil/kab', [WilayahController::class, 'kabupaten'])->middleware(['peserta'])->name('get.json.wil.kab');
 Route::get('/json/wil/kec', [WilayahController::class, 'kecamatan'])->middleware(['peserta'])->name('get.json.wil.kec');
 Route::get('/json/alquran/{id}', [AlquranController::class, 'show'])->middleware(['role:admin,peserta'])->name('get.json.alquran.id');
+Route::get('/json/bbq/{id}', [BbqregController::class, 'show'])->middleware(['role:admin,peserta,asesor'])->name('get.bbq.id');
 
 Route::put('/json/pegawai/{id}/ranting', [BiodataController::class, 'rantingUpdate'])->middleware(['role:admin,peserta,asesor'])->name('put.json.pegawai.id.ranting');
 Route::put('/json/users/{id}/role', [UsersController::class, 'updateRoles'])->middleware(['role:admin'])->name('put.json.users.role');
 Route::put('/json/alquran/{id}', [AlquranController::class, 'update'])->middleware(['role:admin'])->name('put.json.alquran.id');
 Route::put('/json/mentor/{id}', [MentorController::class, 'update'])->middleware(['role:admin'])->name('put.json.mentor.id');
 Route::put('/json/mentor/{id}/pertemuan', [BbqregController::class, 'pertemuanUpdate'])->middleware(['role:admin,asesor'])->name('put.json.bbq.id.pertemuan');
+Route::put('/json/bbq/{id}/validasi', [BbqregController::class, 'mentorValidasi'])->middleware(['role:admin,asesor'])->name('put.json.bbq.id.validasi');
 
 Route::delete('/json/users/{id}', [UsersController::class, 'destroy'])->middleware(['role:admin'])->name('delete.users');
 Route::delete('/json/alquran/{id}', [AlquranController::class, 'destroy'])->middleware(['role:admin'])->name('delete.alquran.id');

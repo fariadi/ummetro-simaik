@@ -50,6 +50,7 @@ $pegawai = $biodataRepository->firstWithUser($profil->id);
 <script src="{{asset('assets/js/front/modal-aktivitas-ranting-add.js')}}"></script>
 <script src="{{asset('assets/js/front/modal-pertemuan-bbq-add.js')}}"></script>
 <script src="{{asset('assets/js/users/modal-foto-add.js')}}"></script>
+<script src="{{asset('assets/js/front/modal-bbq-validasi.js')}}"></script>
 @endsection
 
 @section('content')
@@ -242,5 +243,6 @@ $pegawai = $biodataRepository->firstWithUser($profil->id);
   </div>
 </div>
 @include('_partials/_modals/modal-aktivitas-ranting-add')
-@include('_partials/_modals/modal-pertemuan-bbq-add')
+@include('_partials/_bbq/modal-bbq-jadwal')
+@include('_partials/_bbq/modal-bbq-validasi')
 @endsection

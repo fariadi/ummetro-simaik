@@ -58,7 +58,7 @@ $(function () {
               '<button class="btn btn-sm btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="ti ti-dots-vertical"></i></button>' +
               '<div class="dropdown-menu dropdown-menu-end m-0">' +
               `<a href="javascript:;" data-id="${full.id}" class="dropdown-item on-pertemuan" data-bs-toggle="modal" data-bs-target="#modal-pertemuan-add">Jadwal BBQ</a>` +
-              `<a href="javascript:;" data-id="${full.id}" class="dropdown-item on-aprove">Form Validasi</a>` +
+              `<a href="javascript:;" data-id="${full.id}" class="dropdown-item on-validasi" data-bs-toggle="modal" data-bs-target="#modal-validasi">Form Validasi</a>` +
               '</div>' +
               '</div>'
             );
