@@ -160,9 +160,12 @@ $pegawai = $biodataRepository->firstWithUser($profil->id);
               <dl class="row mt-2">
                 <dt class="col-sm-3">Nama Ranting</dt>
                 <dd class="col-sm-9">
-                  {{ $rantingKec = ($pegawai->rantingKec) ? $pegawai->rantingKec->nama : '' }}
-                  {{ $rantingKab = ($pegawai->rantingKab) ? $pegawai->rantingKab->nama : '' }}
-                  {{ ($pegawai->ranting_tingkat === 'ranting') ? strtoupper($pegawai->ranting_tingkat . ' '. $rantingKec) : '' }}
+                  @php 
+                    $rantingKel = ($pegawai->ranting_desa_kel) ? $pegawai->ranting_desa_kel : '';
+                    $rantingKec = ($pegawai->rantingKec) ? $pegawai->rantingKec->nama : '';
+                    $rantingKab = ($pegawai->rantingKab) ? $pegawai->rantingKab->nama : '';
+                  @endphp
+                  {{ ($pegawai->ranting_tingkat === 'ranting') ? strtoupper($pegawai->ranting_tingkat . ' '. $rantingKel) : '' }}
                   {{ ($pegawai->ranting_tingkat === 'cabang') ? strtoupper($pegawai->ranting_tingkat . ' '. $rantingKab) : '' }}
                 </dd>
                 <dt class="col-sm-3">Tingkat</dt>

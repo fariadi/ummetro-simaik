@@ -1,5 +1,5 @@
 /**
- * Page Mahasiswa
+ * Page Home Mentor
  */
 
 'use strict';
@@ -13,6 +13,7 @@ $(function () {
   });
 
   var dtBbqTable1 = $('.dt-table-bbq1');
+  var dtBbqTableValidasi = $('.dt-table-bbq-validasi');
 
   if (dtBbqTable1.length) {
     var bbqTable1 = dtBbqTable1.DataTable({
@@ -175,14 +176,173 @@ $(function () {
     });
   }
 
+  if (dtBbqTableValidasi.length) {
+    var bbqTableValidasi = dtBbqTableValidasi.DataTable({
+      processing: true,
+      serverSide: true,
+      ajax: {
+        url: baseUrl + 'dataTableJson/bbq-pengajuan',
+        "data": function(d){
+            d.mentor_user_id = (userId) ? userId : null;
+            d.validasi = 'show'
+        }
+      },
+      columns: [
+        // columns according to JSON
+        { data: '' },
+        { data: 'pegawai_id' },
+        { data: 'surat_id' },
+        { data: '' },
+        { data: '' },
+        { data: '' },
+        { data: 'action' }
+      ],
+      order: [[1, 'desc']],
+      columnDefs: [
+        {
+          // For Responsive
+          className: 'control',
+          searchable: false,
+          orderable: false,
+          responsivePriority: 2,
+          targets: 0,
+          render: function (data, type, full, meta) {
+            return ++meta.row;
+          }
+        },
+        {
+          // Actions
+          targets: -1,
+          title: 'Actions',
+          searchable: false,
+          orderable: false,
+          render: function (data, type, full, meta) {
+            return (
+              '<div class="d-inline-block text-nowrap">' +
+              '<button class="btn btn-sm btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="ti ti-dots-vertical"></i></button>' +
+              '<div class="dropdown-menu dropdown-menu-end m-0">' +
+              `<a href="javascript:;" data-id="${full.id}" class="dropdown-item on-validasi" data-bs-toggle="modal" data-bs-target="#modal-validasi">Form Validasi</a>` +
+              '</div>' +
+              '</div>'
+            );
+          }
+        },
+        {
+            targets: 1,
+            searchable: false,
+            orderable: false,
+            render: function (data, type, full, meta) {
+              /* var tglLhr = moment(full.tgl_lahir, "YYYY-MM-DD", 'id').format("DD-MMM-YYYY"); */
+              var pegawai = full.pegawai;
+              var $row_output =
+                '<div class="d-flex justify-content-start align-items-center">' +
+                ' <div class="d-flex flex-column">' +
+                '<span class="fw-semibold">' +
+                pegawai.nama_lengkap +
+                '</span>' +
+                '<small class="text-truncate text-muted"> NBM. ' +
+                pegawai.nbm +
+                '</small>' +
+                '</div>' +
+                '</div>';
+              return $row_output;
+            }
+        },
+        {
+            targets: 2,
+            searchable: false,
+            orderable: false,
+            render: function (data, type, full, meta) {
+              /* var tglLhr = moment(full.tgl_lahir, "YYYY-MM-DD", 'id').format("DD-MMM-YYYY"); */
+              var $row_output =
+                '<div class="d-flex justify-content-start align-items-center">' +
+                ' <div class="d-flex flex-column">' +
+                '<span class="fw-semibold">' +
+                full.surah.nama_surat +
+                '</span>' +
+                '<small class="text-truncate text-muted"> Surah ke-. ' +
+                full.surah.surat_ke +
+                '</small>' +
+                '</div>' +
+                '</div>';
+              return $row_output;
+            }
+        },
+        {
+          targets: 3,
+          searchable: false,
+          orderable: false,
+          render: function (data, type, full, meta) {
+            /* var tglLhr = moment(full.tgl_lahir, "YYYY-MM-DD", 'id').format("DD-MMM-YYYY"); */
+            var tglReg = moment(full.pengajuan_tanggal, 'YYYY-MM-DD HH:mm:ss', 'id').format('DD-MMM-YYYY  HH:mm:ss');
+
+            var $row_output =
+                '<div class="d-flex justify-content-start align-items-center">' +
+                ' <div class="d-flex flex-column">' +
+                '<span class="fw-semibold">' +
+                full.mulai_ayat_ke + ' s.d ' + full.sampai_ayat_ke + 
+                '</span>' +
+                '<small class="text-truncate text-muted">  Tanggal. ' + tglReg + '</small>' +
+                '</small>' +
+                '</div>' +
+                '</div>';
+              return $row_output;
+          }
+        },
+        {
+          targets: 4,
+          searchable: false,
+          orderable: false,
+          render: function (data, type, full, meta) {
+            
+            var tglUji = (full.mentor_jadwal) ? moment(full.mentor_jadwal, 'YYYY-MM-DD HH:mm:ss', 'id').format('DD-MMM-YYYY  HH:mm:ss') : 'Belum dibuat';
+            var $row_output =
+              '<div class="d-flex justify-content-start align-items-center">' +
+              '<div class="d-flex flex-column">' +
+              ' ' + tglUji +
+              '<small class="text-truncate text-muted">' + full.mentor_lokasi + '</small>' +
+              '</small>' +
+              '</div>' +
+              '</div>';
+            return $row_output;
+          }
+        },
+        {
+          targets: 5,
+          searchable: false,
+          orderable: false,
+          render: function (data, type, full, meta) {
+            var $row_output =
+              '<div class="d-flex justify-content-start align-items-center">' +
+              '<div class="d-flex flex-column">' + full.mentor_validasi.toUpperCase() +
+              '</small>' +
+              '</div>' +
+              '</div>';
+            return $row_output;
+          }
+        }
+      ],
+      dom:
+        '<"row me-2"' +
+        '<"col-md-2"<"me-3"l>>' +
+        '<"col-md-10"<"dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-end flex-md-row flex-column mb-3 mb-md-0"fB>>' +
+        '>t' +
+        '<"row mx-2"' +
+        '<"col-sm-12 col-md-6"i>' +
+        '<"col-sm-12 col-md-6"p>' +
+        '>',
+      language: {
+        sLengthMenu: '_MENU_',
+        search: '',
+        searchPlaceholder: 'Search..'
+      },
+      buttons: []
+    });
+  }
+
   setTimeout(() => {
     $('.dataTables_filter .form-control').removeClass('form-control-sm');
     $('.dataTables_length .form-select').removeClass('form-select-sm');
-    /*
-        $('#modal-add-mhs').on('hidden.bs.modal', function () {
-          $(this).find('form').trigger('reset');
-        })
-        */
   }, 300);
 
   $('.dt-table-bbq1').on('click', '.on-pertemuan', function () {

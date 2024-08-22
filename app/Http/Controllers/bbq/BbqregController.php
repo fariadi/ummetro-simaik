@@ -60,8 +60,17 @@ class BbqregController extends Controller
       $orderField = isset($colOrder[$request->input('order.0.column')])
         ? $colOrder[$request->input('order.0.column')]
         : null;
+      $isValidasi =  ($request->input('validasi')) 
+        ? $request->input('validasi') 
+        : '';
       $isFiltered = RequestFilterHelper::fieldKey($filterField, $request->all());
-      $isFiltered[] = ['mentor_validasi', '=', null];
+      if($isValidasi == 'show') {
+        $isFiltered[] = ['mentor_validasi', '<>', null];
+      }
+      else {
+        $isFiltered[] = ['mentor_validasi', '=', null];
+      }
+      
       $whereKeys = [
         'order'  => !empty($orderField) ? [$orderField, $request->input('order.0.dir')] : ['id', 'ASC'],
         'limit'  => $request->input('length'),

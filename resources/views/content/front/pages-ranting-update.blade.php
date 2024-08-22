@@ -103,7 +103,7 @@ $registered = false;
                 </div>
                 <div class="row  mb-3">
                     <div class="col-12 col-md-12">
-                      <label class="form-label" for="ranting_desa_kel">Desa/Kelurahan</label>
+                      <label class="form-label" for="ranting_desa_kel">Ranting/Desa/Kelurahan</label>
                       <input type="text" id="ranting_desa_kel" name="ranting_desa_kel" class="form-control" placeholder="" />
                     </div>
                 </div>

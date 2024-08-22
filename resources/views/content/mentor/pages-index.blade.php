@@ -51,6 +51,7 @@ $pegawai = $biodataRepository->firstWithUser($profil->id);
 <script src="{{asset('assets/js/front/modal-pertemuan-bbq-add.js')}}"></script>
 <script src="{{asset('assets/js/users/modal-foto-add.js')}}"></script>
 <script src="{{asset('assets/js/front/modal-bbq-validasi.js')}}"></script>
+<script src="{{asset('assets/js/front/pages-mentor-bbq.js')}}"></script>
 @endsection
 
 @section('content')
@@ -217,7 +218,7 @@ $pegawai = $biodataRepository->firstWithUser($profil->id);
       <div class="card-body mt-4">
         <div class="tab-content p-0">
           <div class="tab-pane fade show active" id="navs-tab-bbq" role="tabpanel">
-            <h5 class="card-title small">DATA PENGAJUAN HAFALAN PEGAWAI BELUM DI SETUJUI</h5>
+            <h5 class="card-title small">DATA PENGAJUAN HAFALAN PEGAWAI BELUM DI VALIDASI</h5>
             <div class="table-responsive text-nowrap">
               <table class="dt-table-bbq1 table">
                 <thead class="border-top table-light">
@@ -234,8 +235,22 @@ $pegawai = $biodataRepository->firstWithUser($profil->id);
             </div>
           </div>
           <div class="tab-pane fade" id="navs-tab-surah" role="tabpanel">
-            <h5 class="card-title">Aktivitas</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <h5 class="card-title small">PENGAJUAN HAFALAN PEGAWAI SUDAH DI VALIDASI</h5>
+            <div class="table-responsive text-nowrap">
+              <table class="dt-table-bbq-validasi table">
+                <thead class="border-top table-light">
+                  <tr>
+                    <th>NO</th>
+                    <th>PEGAWAI</th>
+                    <th>NAMA SURAT</th>
+                    <th>AYAT YANG DI HAFAL</th>
+                    <th>TANGGAL PERTEMUAN</th>
+                    <th>STATUS</th>
+                    <th>#</th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
           </div>
         </div>
       </div>

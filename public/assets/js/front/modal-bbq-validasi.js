@@ -95,14 +95,13 @@ document.addEventListener('DOMContentLoaded', function (e) {
                     });
 
                     setTimeout(() => {
+                        if ( $.fn.DataTable.isDataTable( '.dt-table-bbq1' ) ) {
+                            var dtTable = new $.fn.dataTable.Api( '.dt-table-bbq1' );
+                            dtTable.reload(null,false);
+                        }
+                        
                         $('#modal-validasi').modal('hide');
                     }, 300);
-                    
-                    if ( $.fn.DataTable.isDataTable( '.dt-table-bbq1' ) ) {
-                        var dtTable = new $.fn.dataTable.Api( '.dt-table-bbq1' );
-                        dtTable.reload(null,false);
-                    }
-                
                 },
                 error: function (err) {
                     var response = err.responseJSON;
