@@ -149,7 +149,7 @@ $(function () {
       dom:
         '<"row me-2"' +
         '<"col-md-2"<"me-3"l>>' +
-        '<"col-md-10"<"dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-end flex-md-row flex-column mb-3 mb-md-0"fB>>' +
+        '<"col-md-10"<"dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-end flex-md-row flex-column mb-3 mb-md-0"rfB>>' +
         '>t' +
         '<"row mx-2"' +
         '<"col-sm-12 col-md-6"i>' +
@@ -217,14 +217,7 @@ $(function () {
           searchable: false,
           orderable: false,
           render: function (data, type, full, meta) {
-            return (
-              '<div class="d-inline-block text-nowrap">' +
-              '<button class="btn btn-sm btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="ti ti-dots-vertical"></i></button>' +
-              '<div class="dropdown-menu dropdown-menu-end m-0">' +
-              `<a href="javascript:;" data-id="${full.id}" class="dropdown-item on-validasi" data-bs-toggle="modal" data-bs-target="#modal-validasi">Form Validasi</a>` +
-              '</div>' +
-              '</div>'
-            );
+            return '';
           }
         },
         {
@@ -325,7 +318,7 @@ $(function () {
       dom:
         '<"row me-2"' +
         '<"col-md-2"<"me-3"l>>' +
-        '<"col-md-10"<"dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-end flex-md-row flex-column mb-3 mb-md-0"fB>>' +
+        '<"col-md-10"<"dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-end flex-md-row flex-column mb-3 mb-md-0"rfB>>' +
         '>t' +
         '<"row mx-2"' +
         '<"col-sm-12 col-md-6"i>' +

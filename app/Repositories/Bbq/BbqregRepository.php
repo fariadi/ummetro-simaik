@@ -62,8 +62,8 @@ class BbqregRepository implements ModelInterface
     $search = isset($data['search'])  ? $data['search'] : '';
     $keys   = isset($data['data'])    ? $data['data'] : [['pegawai_id', '!=', null]];
     $surah  = isset($data['with']['surah'])  ? $data['with']['surah'] : null;
-    return Model::whereHas('surah', function($query) use ($surah,$search) {
-                  $query->where('nama_surat', 'LIKE', "%{$search}%");
+    return Model::whereHas('pegawai', function($query) use ($surah,$search) {
+                  $query->where('nama_lengkap', 'LIKE', "%{$search}%");
                   if($surah) $query->where($surah);
                 })
                 ->with('surah')
