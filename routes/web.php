@@ -79,6 +79,8 @@ Route::get('/page/pegawai', [AdminPage::class, 'pegawai'])->middleware(['role:ad
 Route::get('/page/pegawai/{id}', [AdminPage::class, 'pegawaiDetail'])->middleware(['role:admin'])->name('page.pegawai.id');
 Route::get('/page/pegawai/{id}/create', [AdminPage::class, 'pegawaiCreate'])->middleware(['role:admin'])->name('page.pegawai.id.create');
 Route::get('/page/hafalan-surah', [AdminPage::class, 'pegawai'])->middleware(['role:admin'])->name('page.hafalan-surah');
+Route::get('/report/bbq', [AdminPage::class, 'reportBbq'])->middleware(['role:admin'])->name('report.bbq');
+Route::get('/report/pegawai', [AdminPage::class, 'pegawai'])->middleware(['role:admin'])->name('report.pegawai');
 
 Route::post('/auth/pratinjau', [AuthController::class, 'pratinjauRegister'])->name('auth-pratinjau-create');
 Route::post('/auth/register', [AuthController::class, 'register'])->name('auth-create');
@@ -102,6 +104,8 @@ Route::get('/json/wil/kec', [WilayahController::class, 'kecamatan'])->middleware
 Route::get('/json/alquran/{id}', [AlquranController::class, 'show'])->middleware(['role:admin,peserta'])->name('get.json.alquran.id');
 Route::get('/json/bbq/{id}', [BbqregController::class, 'show'])->middleware(['role:admin,peserta,asesor'])->name('get.bbq.id');
 
+Route::get('/json/report/bbq', [BbqregController::class, 'reportPegawaiResult'])->middleware(['role:admin,peserta,asesor']);
+
 Route::put('/json/pegawai/{id}/ranting', [BiodataController::class, 'rantingUpdate'])->middleware(['role:admin,peserta,asesor'])->name('put.json.pegawai.id.ranting');
 Route::put('/json/users/{id}/role', [UsersController::class, 'updateRoles'])->middleware(['role:admin'])->name('put.json.users.role');
 Route::put('/json/alquran/{id}', [AlquranController::class, 'update'])->middleware(['role:admin'])->name('put.json.alquran.id');
@@ -118,6 +122,7 @@ Route::get('/dataTableJson/alquran', [AlquranController::class, 'dataTableJson']
 Route::get('/dataTableJson/users', [UsersController::class, 'dataTableJson'])->middleware(['role:admin'])->name('dt-table.users');
 Route::get('/dataTableJson/pegawai', [PegawaiController::class, 'dataTableJson'])->middleware(['role:admin'])->name('dt-table.pegawai');
 Route::get('/dataTableJson/bbq-pengajuan', [BbqregController::class, 'dataTableJson'])->middleware(['role:admin,peserta,asesor'])->name('dt-table.bbq-pengajuan');
+Route::get('/dataTableJson/aktivitas-ranting', [AktivitasRantingController::class, 'index'])->middleware(['role:admin,peserta,asesor']);
 
 
 Route::get('kepegawaian/{path}', [KepegawaianController::class,'apiGet'])->where('path', '.+')->middleware(['auth']);

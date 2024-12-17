@@ -56,13 +56,19 @@
     {
       "name": "Report",
       "icon": "menu-icon tf-icons ti ti-table-options",
-      "slug": "dashboard",
+      "slug": ["report.pegawai", "report.bbq"],
       "submenu": [
         {
-          "url": "/page/hafalan-surah",
+          "url": "/report/pegawai",
           "icon": "menu-icon tf-icons ti ti-users",
-          "name": "Hafalan surah",
-          "slug": "page.hafalan-surah"
+          "name": "Data Pegawai",
+          "slug": "report.pegawai"
+        },
+        {
+          "url": "/report/bbq",
+          "icon": "menu-icon tf-icons ti ti-users",
+          "name": "Pengajuan Surah",
+          "slug": "report.bbq"
         }
       ]
     },

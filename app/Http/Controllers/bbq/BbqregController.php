@@ -146,6 +146,54 @@ class BbqregController extends Controller
     }
   }
 
-  
+  public function reportPegawaiResult(Request $request, BbqregRepository $bbqregRepository)
+  {
+    try {
+      $colOrder = [
+        1 => 'id',
+        2 => 'id',
+      ];
+      $filterField = [
+        'pegawai_id' => 'pegawai_id',
+        'mentor_user_id' => 'mentor_user_id',
+      ];
+      $search  = ($request->input('search')) 
+        ? $request->input('search') 
+        : '';
+      $search  = (is_array($search)) 
+        ? $search['value'] 
+        : $search;
+      $orderField = isset($colOrder[$request->input('order.0.column')])
+        ? $colOrder[$request->input('order.0.column')]
+        : null;
+      $isFiltered = RequestFilterHelper::fieldKey($filterField, $request->all());
+      
+      
+      $whereKeys = [
+        'order'  => !empty($orderField) ? [$orderField, $request->input('order.0.dir')] : ['id', 'ASC'],
+        'limit'  => $request->input('length'),
+        'start'  => $request->input('start'),
+        'search' => $search,
+        'data'   => $isFiltered,
+      ];
+
+      return response()->json([
+        'draw' => intval($request->input('draw')),
+        'recordsTotal' => 0,
+        'recordsFiltered' => 0,
+        'code' => 200,
+        'data' => $bbqregRepository->countPegawaiSurat($whereKeys)
+      ]);
+    } catch (\Exception $e) {
+      return response()->json(
+        [
+          'message' => $e->getMessage(),
+          'code' => 500,
+          'data' => [],
+        ],
+        Response::HTTP_INTERNAL_SERVER_ERROR
+      );
+    }
+  }
 
 }

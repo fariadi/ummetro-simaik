@@ -35,6 +35,7 @@ class AdminPage extends Controller
   {
     return view('content.pages.pages-pegawai');
   }
+  
 
   public function pegawaiCreate(
     $id = null
@@ -54,4 +55,8 @@ class AdminPage extends Controller
     ]);
   }
 
+  public function reportBbq()
+  {
+    return view('content.pages.report-pegawai-bbq');
+  }
 }
