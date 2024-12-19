@@ -22,7 +22,7 @@ class PegawaiController extends Controller
   use ResponseTrait;
 
 
-  public function index(): JsonResponse
+  public function index(Request $request): JsonResponse
   {
     $length = $request->input('length') ? $request->input('length') : 10;
     try {
@@ -37,9 +37,8 @@ class PegawaiController extends Controller
 
   public function show(
     PegawaiRepository $pegawaiRepository,
-    $id=null
-  ): JsonResponse
-  {
+    $id = null
+  ): JsonResponse {
     //$client = new HttpSimpeg();
     $data = $pegawaiRepository->getByField(['data' => ['id' => $id]]);
     //$data = $client->token();
@@ -48,32 +47,31 @@ class PegawaiController extends Controller
 
   public function dataTableJson(Request $request)
   {
-      $length = $request->input('length') ? $request->input('length') : 10;
-      $start = $request->input('start') ? $request->input('start') : 0;
-      $search = ($request->input('search')) ? $request->input('search') : '';
-      $search = (is_array($search)) ? $search['value'] : $search;
-      try {
-        $client = new HttpSimpeg();
-        $pegawai = $client->request('GET', 'api/pegawai/list', ['limit' => $length, 'offsite' => $start, 'search' => $search]);
-      } catch (\Exception $e) {
-        return response()->json(
-          [
-            'messages' => $e->getMessage(),
-            'code' => 500,
-            'data' => [],
-          ],
-          Response::HTTP_INTERNAL_SERVER_ERROR
-        );
-      }
-       return  response()->json($pegawai);
-      return response()->json([
-        'draw' => intval($request->input('draw')),
-        'recordsTotal' => isset($pegawai->total) ? $pegawai->total : 0,
-        'recordsFiltered' => isset($pegawai->totalFilter) ? $pegawai->totalFilter : 0,
-        'code' => 200,
-        'messages' => 'Ok!.',
-        'data' => $pegawai->data,
-      ]);
+    $length = $request->input('length') ? $request->input('length') : 10;
+    $start = $request->input('start') ? $request->input('start') : 0;
+    $search = ($request->input('search')) ? $request->input('search') : '';
+    $search = (is_array($search)) ? $search['value'] : $search;
+    try {
+      $client = new HttpSimpeg();
+      $pegawai = $client->request('GET', 'api/pegawai/list', ['limit' => $length, 'offsite' => $start, 'search' => $search]);
+    } catch (\Exception $e) {
+      return response()->json(
+        [
+          'messages' => $e->getMessage(),
+          'code' => 500,
+          'data' => [],
+        ],
+        Response::HTTP_INTERNAL_SERVER_ERROR
+      );
+    }
+    return  response()->json($pegawai);
+    return response()->json([
+      'draw' => intval($request->input('draw')),
+      'recordsTotal' => isset($pegawai->total) ? $pegawai->total : 0,
+      'recordsFiltered' => isset($pegawai->totalFilter) ? $pegawai->totalFilter : 0,
+      'code' => 200,
+      'messages' => 'Ok!.',
+      'data' => $pegawai->data,
+    ]);
   }
-
 }

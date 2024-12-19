@@ -22,6 +22,7 @@ use App\Http\Controllers\pages\HomePage;
 use App\Http\Controllers\pages\FrontPage;
 use App\Http\Controllers\pages\AdminPage;
 use App\Http\Controllers\pages\MentorPage;
+use App\Http\Controllers\pdf\PDFPortofolio;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -60,18 +61,18 @@ Route::get('/auth/reset-password/{token}', function (string $token) {
 Route::get('/auth/google', [GoogleController::class, 'redirectToProvider'])->name('auth-google-redirect');
 Route::get('/auth/google/callback', [GoogleController::class, 'handleProviderCallback'])->name('auth-google-callback');
 
-Route::get('/', [HomePage::class,'index'])
+Route::get('/', [HomePage::class, 'index'])
   ->middleware(['role:admin,peserta,asesor'])
   ->name('pages-home');
 
 
-Route::get('/home', [FrontPage::class,'index'])->middleware(['peserta'])->name('home');
-Route::get('/mentor', [MentorPage::class,'index'])->middleware(['role:admin,asesor'])->name('page.asesor');
-Route::get('/front/password', [FrontPage::class,'password'])->middleware(['role:admin,peserta'])->name('front.password');
-Route::get('/front/ranting', [FrontPage::class,'rantingEdit'])->middleware(['peserta'])->name('front.ranting');
-Route::get('/front/bbq/create', [FrontPage::class,'bbqFormAdd'])->middleware(['peserta'])->name('front.bbq.create');
+Route::get('/home', [FrontPage::class, 'index'])->middleware(['peserta'])->name('home');
+Route::get('/mentor', [MentorPage::class, 'index'])->middleware(['role:admin,asesor'])->name('page.asesor');
+Route::get('/front/password', [FrontPage::class, 'password'])->middleware(['role:admin,peserta'])->name('front.password');
+Route::get('/front/ranting', [FrontPage::class, 'rantingEdit'])->middleware(['peserta'])->name('front.ranting');
+Route::get('/front/bbq/create', [FrontPage::class, 'bbqFormAdd'])->middleware(['peserta'])->name('front.bbq.create');
 
-Route::get('/dashboard', [AdminPage::class,'index'])->middleware(['role:admin'])->name('dashboard');
+Route::get('/dashboard', [AdminPage::class, 'index'])->middleware(['role:admin'])->name('dashboard');
 Route::get('/users', [AdminPage::class, 'users'])->middleware(['role:admin'])->middleware(['role:admin'])->name('pages.users');
 Route::get('/page/wilayah', [AdminPage::class, 'refWilayah'])->middleware(['role:admin'])->name('page.wilayah');
 Route::get('/page/alquran', [AdminPage::class, 'refAlquran'])->middleware(['role:admin'])->name('page.alquran');
@@ -89,7 +90,7 @@ Route::post('/auth/simpeg/authenticate', [ApiController::class, 'simpegAuth'])->
 Route::post('/auth/forgot', [AuthController::class, 'sendMailForget'])->middleware('guest')->name('post.password.email');
 Route::post('/auth/reset-password', [AuthController::class, 'resetPassword'])->middleware('guest')->name('password.update');
 Route::post('/auth/peserta/authenticate', [AuthController::class, 'loginAsPeserta'])->middleware(['role:admin'])->name('auth.loginas-peserta');
-Route::post('/json/user/photo', [UsersController::class,'upload'])->middleware(['role:admin,peserta,asesor'])->name('post.json.users.foto');
+Route::post('/json/user/photo', [UsersController::class, 'upload'])->middleware(['role:admin,peserta,asesor'])->name('post.json.users.foto');
 Route::post('/json/alquran', [AlquranController::class, 'store'])->middleware(['role:admin'])->name('post.json.alquran');
 Route::post('/json/bbq', [BbqregController::class, 'store'])->middleware(['role:admin,peserta'])->name('post.json.bbq');
 Route::post('/json/mentor', [MentorController::class, 'store'])->middleware(['role:admin'])->name('post.json.mentor');
@@ -125,5 +126,7 @@ Route::get('/dataTableJson/bbq-pengajuan', [BbqregController::class, 'dataTableJ
 Route::get('/dataTableJson/aktivitas-ranting', [AktivitasRantingController::class, 'index'])->middleware(['role:admin,peserta,asesor']);
 
 
-Route::get('kepegawaian/{path}', [KepegawaianController::class,'apiGet'])->where('path', '.+')->middleware(['auth']);
-Route::post('kepegawaian/{path}', [KepegawaianController::class,'apiPost'])->where('path', '.+')->middleware(['auth']);
+Route::get('kepegawaian/{path}', [KepegawaianController::class, 'apiGet'])->where('path', '.+')->middleware(['auth']);
+Route::post('kepegawaian/{path}', [KepegawaianController::class, 'apiPost'])->where('path', '.+')->middleware(['auth']);
+
+Route::get('download/portofolio/{id}', [PDFPortofolio::class, 'generate'])->name('download.pegawai')->middleware('auth');

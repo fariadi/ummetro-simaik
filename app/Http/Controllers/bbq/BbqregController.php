@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\bbq;
+
 use App\Http\Controllers\Controller;
 use App\Repositories\Bbq\BbqregRepository;
 use App\Http\Requests\bbq\BbqregStore;
@@ -11,7 +12,7 @@ use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
 use App\Traits\ResponseTrait;
 
-use RequestFilterHelper;
+use App\Helpers\RequestFilterHelper;
 
 class BbqregController extends Controller
 {
@@ -51,26 +52,25 @@ class BbqregController extends Controller
         'pegawai_id' => 'pegawai_id',
         'mentor_user_id' => 'mentor_user_id',
       ];
-      $search  = ($request->input('search')) 
-        ? $request->input('search') 
+      $search  = ($request->input('search'))
+        ? $request->input('search')
         : '';
-      $search  = (is_array($search)) 
-        ? $search['value'] 
+      $search  = (is_array($search))
+        ? $search['value']
         : $search;
       $orderField = isset($colOrder[$request->input('order.0.column')])
         ? $colOrder[$request->input('order.0.column')]
         : null;
-      $isValidasi =  ($request->input('validasi')) 
-        ? $request->input('validasi') 
+      $isValidasi =  ($request->input('validasi'))
+        ? $request->input('validasi')
         : '';
       $isFiltered = RequestFilterHelper::fieldKey($filterField, $request->all());
-      if($isValidasi == 'show') {
+      if ($isValidasi == 'show') {
         $isFiltered[] = ['mentor_validasi', '<>', null];
-      }
-      else {
+      } else {
         $isFiltered[] = ['mentor_validasi', '=', null];
       }
-      
+
       $whereKeys = [
         'order'  => !empty($orderField) ? [$orderField, $request->input('order.0.dir')] : ['id', 'ASC'],
         'limit'  => $request->input('length'),
@@ -157,18 +157,18 @@ class BbqregController extends Controller
         'pegawai_id' => 'pegawai_id',
         'mentor_user_id' => 'mentor_user_id',
       ];
-      $search  = ($request->input('search')) 
-        ? $request->input('search') 
+      $search  = ($request->input('search'))
+        ? $request->input('search')
         : '';
-      $search  = (is_array($search)) 
-        ? $search['value'] 
+      $search  = (is_array($search))
+        ? $search['value']
         : $search;
       $orderField = isset($colOrder[$request->input('order.0.column')])
         ? $colOrder[$request->input('order.0.column')]
         : null;
       $isFiltered = RequestFilterHelper::fieldKey($filterField, $request->all());
-      
-      
+
+
       $whereKeys = [
         'order'  => !empty($orderField) ? [$orderField, $request->input('order.0.dir')] : ['id', 'ASC'],
         'limit'  => $request->input('length'),
@@ -195,5 +195,4 @@ class BbqregController extends Controller
       );
     }
   }
-
 }
