@@ -7,6 +7,8 @@ use App\Models\Aktivitas\AktivitasRantingModel;
 use App\Models\Bbq\BbqregModel;
 use App\Models\Pegawai\PegawaiModel;
 use FPDF;
+use Illuminate\Support\Facades\Storage;
+
 // use setasign\Fpdf\FPDF;
 
 class PDFPortofolio extends Controller
@@ -25,7 +27,8 @@ class PDFPortofolio extends Controller
             ->with('mentor')
             ->where('pegawai_id', $data->id)
             ->get();
-        // dd($riwayat_hafalan);
+        // dd($data->user->foto);
+        $kelamin = $data->user->jk == 'L' ? 'Laki - Laki' : 'Perempuan';
         $nama_ranting =  $data && $data->ranting_tingkat === 'ranting' ? strtoupper($data->ranting_tingkat . ' ' . $data->rantingKec->nama) : '';
         $tingkat = $data && $data->ranting_tingkat ? strtoupper($data->ranting_tingkat) : 'Tidak ada';
         $provinsi = $data &&  $data->rantingProv ?  $data->rantingProv->nama : '-';
@@ -36,45 +39,72 @@ class PDFPortofolio extends Controller
         // dd($data->user->jk);
         $pdf = new Fpdf();
         $pdf->AddPage('P', 'A4');
-        $pdf->SetFont('Arial', '', 10);
+        $pdf->SetFont('Arial', 'B', 10);
         //profile
-        $pdf->Cell(180, 10, 'Profile', 'LTR', 1);
-        $pdf->SetFontSize('8');
-        $pdf->Cell(27, 8, 'Nama', 'LTRB', 0);
-        $pdf->Cell(153, 8,  $data->nama_lengkap, 'TRB', 1);
+        $pdf->Cell(137, 10, 'Profile', 'LTR', 1,);
+        // public_path("storage/images/user/aik/profile-dummy.png");
+        $pdf->Image(public_path("storage/images/user/aik/profile-dummy.png"), 149, 20, 40, 40, 'PNG');
+        $pdf->SetFont('Arial', 'B', 8);
+        $pdf->Cell(27, 8, 'Nama Lengkap', 'LTRB', 0);
+        $pdf->SetFont('Arial', '', 7);
+        $pdf->Cell(110, 8,  $data->nama_lengkap, 'TRB', 1);
+        $pdf->SetFont('Arial', 'B', 8);
+        $pdf->Cell(27, 8, 'Nbm', 'LRB', 0);
+        $pdf->SetFont('Arial', '', 7);
+        $pdf->Cell(110, 8, $data->nmb, 'RB', 1);
+        $pdf->SetFont('Arial', 'B', 8);
         $pdf->Cell(27, 8, 'Kelamin', 'LRB', 0);
-        $kelamin = $data->user->jk == 'L' ? 'Laki - Laki' : 'Perempuan';
-        $pdf->Cell(153, 8,    $kelamin, 'RB', 1);
+        $pdf->SetFont('Arial', '', 7);
+        $pdf->Cell(110, 8,    $kelamin, 'RB', 1);
+        $pdf->SetFont('Arial', 'B', 8);
         $pdf->Cell(27, 8, 'Alamat', 'LRB', 0);
-        $pdf->Cell(153, 8,   $data->user->jln, 'RB', 1);
+        $pdf->SetFont('Arial', '', 7);
+        $pdf->Cell(110, 8,   $data->user->jln, 'RB', 1);
+        $pdf->SetFont('Arial', 'B', 8);
         $pdf->Cell(27, 8, 'No. HP', 'LRB', 0);
-        $pdf->Cell(153, 8,  $data->user->telepon_seluler, 'RB', 1);
+        $pdf->SetFont('Arial', '', 7);
+        $pdf->Cell(110, 8,  $data->user->telepon_seluler, 'RB', 1);
+        $pdf->SetFont('Arial', 'B', 8);
         $pdf->Cell(27, 8, 'Email', 'LBR', 0);
-        $pdf->Cell(153, 8,   $data->user->email, 'RB', 1);
+        $pdf->SetFont('Arial', '', 7);
+        $pdf->Cell(110, 8,   $data->user->email, 'RB', 1);
         //end profile
         $pdf->Ln(5);
         // informasi ranting
-        $pdf->SetFontSize(10);
+        $pdf->SetFont('Arial', 'B', 10);
         $pdf->Cell('180', 10, 'Informasi Ranting', 'LTR', 1);
-        $pdf->SetFontSize('8');
+        $pdf->SetFont('Arial', 'B', 8);
         $pdf->Cell(27, 8, 'Nama Ranting', 'LTRB', 0);
+        $pdf->SetFont('Arial', '', 7);
         $pdf->Cell(153, 8,  $nama_ranting, 'RTB', 1);
+        $pdf->SetFont('Arial', 'B', 8);
         $pdf->Cell(27, 8, 'Tingkat', 'LRB', 0);
+        $pdf->SetFont('Arial', '', 7);
         $pdf->Cell(153, 8,  $tingkat, 'RDB', 1);
+        $pdf->SetFont('Arial', 'B', 8);
         $pdf->Cell(27, 8, 'Provinsi', 'LRB', 0);
+        $pdf->SetFont('Arial', '', 7);
         $pdf->Cell(153, 8,  $provinsi, 'RDB', 1);
+        $pdf->SetFont('Arial', 'B', 8);
         $pdf->Cell(27, 8, 'Kabupaten', 'LRB', 0);
+        $pdf->SetFont('Arial', '', 7);
         $pdf->Cell(153, 8,  $kabupaten, 'RDB', 1);
+        $pdf->SetFont('Arial', 'B', 8);
         $pdf->Cell(27, 8, 'Kecamatan', 'LRB', 0);
+        $pdf->SetFont('Arial', '', 7);
         $pdf->Cell(153, 8,  $kecamatan, 'RDB', 1);
+        $pdf->SetFont('Arial', 'B', 8);
         $pdf->Cell(27, 8, 'Alamat', 'LRB', 0);
+        $pdf->SetFont('Arial', '', 7);
         $pdf->Cell(153, 8,  $alamat, 'RDB', 1);
+        $pdf->SetFont('Arial', 'B', 8);
         $pdf->Cell(27, 8, 'Desa/Kelurahan', 'LRB', 0);
+        $pdf->SetFont('Arial', '', 7);
         $pdf->Cell(153, 8,  $desa, 'RDB', 1);
         // end informasi ranting
         $pdf->Ln(5);
         //aktivitas ranting
-        $pdf->SetFontSize(10);
+        $pdf->SetFont('Arial', 'B', 10);
         $pdf->Cell(180, 10, 'Aktivitas Ranting', 1, 1);
         $pdf->SetFontSize(8);
         $pdf->Cell(7, 8, 'No', 1, 0, 'C');
@@ -84,6 +114,7 @@ class PDFPortofolio extends Controller
 
         $no = 1;
         foreach ($aktivitas_ranting as $aktivitas) {
+            $pdf->SetFont('Arial', '', 7);
             $pdf->Cell(7, 7, $no, 1, 0, 'C');
             $pdf->Cell(27, 7, $aktivitas->aktivitas_tanggal, 1, 0);
             $pdf->Cell(30, 7, $aktivitas->aktivitas_tempat, 1, 0);
@@ -94,7 +125,7 @@ class PDFPortofolio extends Controller
         //end aktifitas ranting
         $pdf->Ln(5);
         //riwayat hafalan
-        $pdf->SetFontSize(10);
+        $pdf->SetFont('Arial', 'B', 10);
         $pdf->Cell(180, 10, 'Riwayat Hafalan', 1, 1);
         $pdf->SetFontSize(8);
         $pdf->Cell(7, 8, 'No', 1, 0, 'C');
@@ -107,6 +138,7 @@ class PDFPortofolio extends Controller
         $no_riwayat = 1;
         foreach ($riwayat_hafalan as $riwayat) {
             // dd($riwayat->surah->nama_surat);
+            $pdf->SetFont('Arial', '', 7);
             $pdf->Cell(7, 7, $no_riwayat, 1, 0, 'C');
             $pdf->Cell(40, 7, $riwayat->surah->nama_surat, 1, 0);
             $pdf->Cell(25, 7, $riwayat->mulai_ayat_ke . 'to' . $riwayat->sampai_ayat_ke, 1, 0);
