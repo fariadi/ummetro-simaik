@@ -15,7 +15,7 @@ use App\Http\Controllers\bbq\MentorController;
 use App\Http\Controllers\ref\WilayahController;
 use App\Http\Controllers\ref\AlquranController;
 use App\Http\Controllers\aktivitas\AktivitasRantingController;
-
+use App\Http\Controllers\bbq\ReportPegawai;
 use App\Http\Controllers\pages\LoginPage;
 use App\Http\Controllers\pages\RegisterPage;
 use App\Http\Controllers\pages\HomePage;
@@ -130,3 +130,4 @@ Route::get('kepegawaian/{path}', [KepegawaianController::class, 'apiGet'])->wher
 Route::post('kepegawaian/{path}', [KepegawaianController::class, 'apiPost'])->where('path', '.+')->middleware(['auth']);
 
 Route::get('download/portofolio/{id}', [PDFPortofolio::class, 'generate'])->name('download.pegawai')->middleware('auth');
+Route::get('/export/pegawai', [ReportPegawai::class, 'reportBbqExcel'])->name('report-excel.bbq')->middleware('auth');
