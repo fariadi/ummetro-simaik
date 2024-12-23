@@ -169,7 +169,8 @@ $pegawai = $biodataRepository->firstWithUser($profil->id);
                     $rantingKab = ($pegawai->rantingKab) ? $pegawai->rantingKab->nama : '';
                   @endphp
                   {{ ($pegawai->ranting_tingkat === 'ranting') ? strtoupper($pegawai->ranting_tingkat . ' '. $rantingKel) : '' }}
-                  {{ ($pegawai->ranting_tingkat === 'cabang') ? strtoupper($pegawai->ranting_tingkat . ' '. $rantingKab) : '' }}
+                  {{ ($pegawai->ranting_tingkat === 'cabang') ? strtoupper($pegawai->ranting_tingkat . ' '. $rantingKec) : '' }}
+                  {{ ($pegawai->ranting_tingkat === 'daerah') ? strtoupper($pegawai->ranting_tingkat . ' '. $rantingKab) : '' }}
                 </dd>
                 <dt class="col-sm-3">Tingkat</dt>
                 <dd class="col-sm-9">{{ ($pegawai->ranting_tingkat) ? strtoupper($pegawai->ranting_tingkat) : 'Tidak ada' }}</dd>

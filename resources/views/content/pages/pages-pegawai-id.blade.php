@@ -172,8 +172,14 @@ $profil  = ($pegawai) ? $usersRepository->getByID($sdmRow->id) : false;
               <dl class="row mt-2">
                 <dt class="col-sm-3">Nama Ranting</dt>
                 <dd class="col-sm-9">
-                  {{ ($pegawai && $pegawai->ranting_tingkat === 'ranting') ? strtoupper($pegawai->ranting_tingkat . ' '. $pegawai->rantingKec->nama) : '' }}
-                  {{ ($pegawai && $pegawai->ranting_tingkat === 'cabang') ? strtoupper($pegawai->ranting_tingkat . ' '. $pegawai->rantingKab->nama) : '' }}
+                  @php 
+                    $rantingKel = ($pegawai->ranting_desa_kel) ? $pegawai->ranting_desa_kel : '';
+                    $rantingKec = ($pegawai->rantingKec) ? $pegawai->rantingKec->nama : '';
+                    $rantingKab = ($pegawai->rantingKab) ? $pegawai->rantingKab->nama : '';
+                  @endphp
+                  {{ ($pegawai->ranting_tingkat === 'ranting') ? strtoupper($pegawai->ranting_tingkat . ' '. $rantingKel) : '' }}
+                  {{ ($pegawai->ranting_tingkat === 'cabang') ? strtoupper($pegawai->ranting_tingkat . ' '. $rantingKec) : '' }}
+                  {{ ($pegawai->ranting_tingkat === 'daerah') ? strtoupper($pegawai->ranting_tingkat . ' '. $rantingKab) : '' }}
                 </dd>
                 <dt class="col-sm-3">Tingkat</dt>
                 <dd class="col-sm-9">{{ ($pegawai && $pegawai->ranting_tingkat) ? strtoupper($pegawai->ranting_tingkat) : 'Tidak ada' }}</dd>
