@@ -95,10 +95,17 @@ class PegawaiController extends Controller
             ->with('surah')
             ->with('mentor')
             ->where('pegawai_id', $data->id)
+            ->whereNotNull('mentor_validasi')
             ->get();
         // dd($data->user->foto);
     $kelamin      = $data->user->jk == 'L' ? 'Laki - Laki' : 'Perempuan';
-    $nama_ranting =  $data && $data->ranting_tingkat === 'ranting' ? strtoupper($data->ranting_tingkat . ' ' . $data->rantingKec->nama) : '';
+    $rantingKel   = ($data->ranting_desa_kel) ? $data->ranting_desa_kel : '';
+    $rantingKec   = ($data->rantingKec) ? $data->rantingKec->nama : '';
+    $rantingKab   = ($data->rantingKab) ? $data->rantingKab->nama : '';
+    $nama_ranting =  $data && $data->ranting_tingkat === 'ranting' ? strtoupper($data->ranting_tingkat . ' ' . $rantingKel) : '';
+    $nama_ranting =  $data && $data->ranting_tingkat === 'cabang' ? strtoupper($data->ranting_tingkat . ' ' . $rantingKec) : $nama_ranting;
+    $nama_ranting =  $data && $data->ranting_tingkat === 'daerah' ? strtoupper($data->ranting_tingkat . ' ' . $rantingKab) : $nama_ranting;
+
     $tingkat      = $data && $data->ranting_tingkat ? strtoupper($data->ranting_tingkat) : 'Tidak ada';
     $provinsi     = $data &&  $data->rantingProv ?  $data->rantingProv->nama : '-';
     $kabupaten    = $data && $data->rantingKab ? $data->rantingKab->nama : '-';
