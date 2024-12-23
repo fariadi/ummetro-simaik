@@ -37,7 +37,6 @@ $(function () {
         // columns according to JSON
         { data: '' },
         { data: 'nbm' },
-        { data: 'nama_lengkap' },
         { data: '' },
         { data: '' }
       ],
@@ -53,23 +52,6 @@ $(function () {
           targets: 0,
           render: function (data, type, full, meta) {
             return meta.row + meta.settings._iDisplayStart + 1;
-          }
-        },
-        {
-          // Actions
-          targets: -1,
-          title: 'Actions',
-          searchable: false,
-          orderable: false,
-          render: function (data, type, full, meta) {
-            return (
-              '<div class="d-inline-block text-nowrap">' +
-              '<button class="btn btn-sm btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="ti ti-dots-vertical"></i></button>' +
-              '<div class="dropdown-menu dropdown-menu-end m-0">' +
-              `<a href="${baseUrl}page/pegawai/${full.id}/create" class="dropdown-item">Registrasi Akun</a>` +
-              '</div>' +
-              '</div>'
-            );
           }
         },
         {

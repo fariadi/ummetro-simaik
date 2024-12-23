@@ -22,6 +22,9 @@ class Helpers
     if(array_search('admin', array_column($roles->toArray(), 'name')) !== false ) {
       return 'admin';
     }
+    if(array_search('pimpinan', array_column($roles->toArray(), 'name')) !== false) {
+      return 'pimpinan';
+    }
     if(array_search('asesor', array_column($roles->toArray(), 'name')) !== false) {
       return 'mentor';
     }

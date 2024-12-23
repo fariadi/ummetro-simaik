@@ -71,13 +71,6 @@
           "slug": "report.bbq"
         }
       ]
-    },
-    {
-      "url": "pages/misc-error",
-      "name": "Blank",
-      "icon": "menu-icon tf-icons ti ti-alert-triangle",
-      "slug": "pages-misc-error",
-      "target": "_blank"
     }
   ],
   "peserta": [
@@ -86,6 +79,46 @@
       "name": "Dashboard",
       "icon": "menu-icon tf-icons ti ti-dashboard",
       "slug": "pages-home"
+    }
+  ],
+  "pimpinan": [
+    {
+      "url": "dashboard",
+      "name": "Dashboard",
+      "icon": "menu-icon tf-icons ti ti-dashboard",
+      "slug": "pages-home"
+    },
+    {
+      "name": "Admin Manager",
+      "icon": "menu-icon tf-icons ti ti-table-options",
+      "slug": ["pages.users", "page.pegawai", "page.wilayah", "page.alquran"],
+      "submenu": [
+        {
+          "url": "/page/pegawai",
+          "name": "Pegawai",
+          "icon": "menu-icon tf-icons ti ti-users",
+          "slug": "page.pegawai"
+        }
+      ]
+    },
+    {
+      "name": "Report",
+      "icon": "menu-icon tf-icons ti ti-table-options",
+      "slug": ["report.pegawai", "report.bbq"],
+      "submenu": [
+        {
+          "url": "/report/pegawai",
+          "icon": "menu-icon tf-icons ti ti-users",
+          "name": "Data Pegawai",
+          "slug": "report.pegawai"
+        },
+        {
+          "url": "/report/bbq",
+          "icon": "menu-icon tf-icons ti ti-users",
+          "name": "Pengajuan Surah",
+          "slug": "report.bbq"
+        }
+      ]
     }
   ]
 }

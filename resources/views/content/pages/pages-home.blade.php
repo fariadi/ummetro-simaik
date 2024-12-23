@@ -44,7 +44,9 @@ $pegawai = $biodataRepository->firstWithUser($profil->id);
 <script src="{{asset('assets/js/libs/form-data-json.min.js')}}"></script>
 <script src="{{asset('assets/js/front/pages-home.js')}}"></script>
 <script src="{{asset('assets/js/front/pages-bbq-tables.js')}}"></script>
+<script src="{{asset('assets/js/front/pages-bbq-validasi-tables.js')}}"></script>
 <script src="{{asset('assets/js/front/modal-aktivitas-ranting-add.js?ver=1.1.0')}}"></script>
+<script src="{{asset('assets/js/front/pages-aktivitas-ranting-tables.js')}}"></script>
 <script src="{{asset('assets/js/users/modal-foto-add.js')}}"></script>
 
 @endsection
@@ -73,6 +75,7 @@ $pegawai = $biodataRepository->firstWithUser($profil->id);
 -->
 <div class="row">
   <div class="col-md-6">
+    <a href="{{ route('download.pegawai', $pegawai->id) }}" class="btn btn-primary mb-1">Download Portofolio</a>
     <div class="card mb-4">
       <h5 class="card-header">Profile Details</h5>
       <!-- Account -->
@@ -197,6 +200,19 @@ $pegawai = $biodataRepository->firstWithUser($profil->id);
           
             <hr/>
             <a href="javascript:void(0);" class="btn btn-primary on-add-aktivitas-ranting" data-pegawai="{{ $pegawai->id }}" data-bs-toggle="modal" data-bs-target="#modal-aktvts-ranting-add">Tambah Aktivitas</a>
+            <div class="card  mt-3">
+              <div class="card-datatable table-responsive">
+                <table class="dt-aktiv-ranting display table border-top table-sm table-striped">
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>TANGGAL</th>
+                      <th>TEMPAT</th>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -204,7 +220,7 @@ $pegawai = $biodataRepository->firstWithUser($profil->id);
   </div>
 </div>
 <div class="row">
-<div class="col-md-12">
+  <div class="col-md-12">
     <div class="card  mb-3">
       <div class="card-header">
         <ul class="nav nav-tabs card-header-tabs" role="tablist">
@@ -237,8 +253,19 @@ $pegawai = $biodataRepository->firstWithUser($profil->id);
           </div>
           <div class="tab-pane fade" id="navs-tab-surah" role="tabpanel">
             <h5 class="card-title">Aktivitas</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="javascript:void(0);" class="btn btn-primary">Go profile</a>
+            <p class="card-text">Data aktivitas BBQ pegawai.</p>
+            <div class="table-responsive text-nowrap">
+              <table class="dt-table-bbq-validasi table">
+                <thead class="border-top table-light">
+                  <tr>
+                    <th>NO</th>
+                    <th>NAMA SURAT</th>
+                    <th>AYAT YANG DI HAFAL</th>
+                    <th>VALIDASI</th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
           </div>
         </div>
       </div>

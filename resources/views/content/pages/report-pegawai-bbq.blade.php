@@ -41,13 +41,13 @@ $configData = Helper::appClasses();
 @endsection
 
 @section('content')
-<h3>
-  Pegawai
+<h3 class="fs-4">
+  REPORT VALIDASI SURAH
   <small class="text-muted">Halaman report bbq pegawai</small>
 </h3>
 <div class="row">
   <div class="col-md-12">
-    <div class="card mt-3">
+    <div class="card">
       <div class="card-datatable table-responsive text-nowrap">
         <table class="dt-table-report table">
           <thead class="border-top table-light">
@@ -56,7 +56,6 @@ $configData = Helper::appClasses();
               <th>NAMA LENGKAP - NBM</th>
               <th>AJUAN SURAH</th>
               <th>DIVALIDASI</th>
-              <th>AKSI</th>
             </tr>
           </thead>
         </table>

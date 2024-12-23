@@ -29,6 +29,12 @@
                   </label>
                 </div>
                 <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="roles_id[]" value="4" id="defaultCheck4"/>
+                  <label class="form-check-label" for="defaultCheck4">
+                    Pimpinan
+                  </label>
+                </div>
+                <div class="form-check">
                   <input class="form-check-input" type="checkbox" name="roles_id[]" value="3" id="defaultCheck2"/>
                   <label class="form-check-label" for="defaultCheck2">
                     Asesor
@@ -47,6 +53,10 @@
                 <div class="form-check form-check-inline">
                   <input name="roles_id" class="form-check-input" type="radio" value="1" id="roles-admin" checked="" />
                   <label class="form-check-label" for="roles-admin">Administrator</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input name="roles_id" class="form-check-input" type="radio" value="4" id="roles-pimpinan" />
+                  <label class="form-check-label" for="roles-pimpinan"> Pimpinan </label>
                 </div>
                 <div class="form-check form-check-inline">
                   <input name="roles_id" class="form-check-input" type="radio" value="3" id="roles-asesor" />

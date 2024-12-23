@@ -83,6 +83,8 @@ $profil  = ($pegawai) ? $usersRepository->getByID($sdmRow->id) : false;
 @endif
 <div class="row">
   <div class="col-md-5">
+    <a href="{{ route('download.pegawai', $sdmId) }}" class="btn btn-primary mb-1">Download
+        Portofolio</a>
     <div class="card mb-4">
       <h5 class="card-header">Profile Details</h5>
       <!-- Account -->
@@ -221,7 +223,7 @@ $profil  = ($pegawai) ? $usersRepository->getByID($sdmRow->id) : false;
   </div>
 </div>
 <div class="row">
-<div class="col-md-12">
+  <div class="col-md-12">
     <div class="card  mb-3">
       <div class="card-header">
         <ul class="nav nav-tabs card-header-tabs" role="tablist">

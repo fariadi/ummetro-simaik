@@ -139,7 +139,7 @@ class AuthController extends Controller
     */
 
     if (Auth::attempt($credentials)) {
-      if (!Auth::user()->hasAnyRole(['admin', 'peserta', 'asesor'])) {
+      if (!Auth::user()->hasAnyRole(['admin', 'peserta', 'asesor', 'pimpinan'])) {
         return back()
           ->withErrors([
             'email' => 'The provided credentials do not match our records.',
@@ -155,10 +155,20 @@ class AuthController extends Controller
         'ip_address' => $request->getClientIp(),
       ]);
 
+      /** End */
+
+      /**
+      * Login With Peserta
+      */
+      if(Auth::user()->hasRole('peserta')) {        
+        Auth::guard('peserta')->loginUsingId(Auth::user()->id);
+      }
+      /** End */
+      
       /**
        * Login With Administrator
        */
-      if(Auth::user()->hasRole('admin')) {
+      if(Auth::user()->hasAnyRole(['admin', 'pimpinan'])) {
         return redirect()->intended('dashboard');
       }
 
@@ -169,23 +179,9 @@ class AuthController extends Controller
         if(Auth::guard('peserta')->loginUsingId(Auth::user()->id)) {
           return redirect()->intended('mentor');
         };
-        
       }
-      
-      /** End */
 
-      /**
-      * Login With Peserta
-      */
-      if(Auth::user()->hasRole('peserta')) {        
-        if(Auth::guard('peserta')->loginUsingId(Auth::user()->id)) {
-          return redirect()->intended('home');
-        };
-      }
-      /** End */
-
-      //return redirect()->intended('dashboard');
-      /** End */
+      return redirect()->intended('home');
     }
 
     return back()

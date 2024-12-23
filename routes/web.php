@@ -71,16 +71,17 @@ Route::get('/front/password', [FrontPage::class,'password'])->middleware(['role:
 Route::get('/front/ranting', [FrontPage::class,'rantingEdit'])->middleware(['peserta'])->name('front.ranting');
 Route::get('/front/bbq/create', [FrontPage::class,'bbqFormAdd'])->middleware(['peserta'])->name('front.bbq.create');
 
-Route::get('/dashboard', [AdminPage::class,'index'])->middleware(['role:admin'])->name('dashboard');
+Route::get('/dashboard', [AdminPage::class,'index'])->middleware(['role:admin,pimpinan'])->name('dashboard');
 Route::get('/users', [AdminPage::class, 'users'])->middleware(['role:admin'])->middleware(['role:admin'])->name('pages.users');
 Route::get('/page/wilayah', [AdminPage::class, 'refWilayah'])->middleware(['role:admin'])->name('page.wilayah');
 Route::get('/page/alquran', [AdminPage::class, 'refAlquran'])->middleware(['role:admin'])->name('page.alquran');
-Route::get('/page/pegawai', [AdminPage::class, 'pegawai'])->middleware(['role:admin'])->name('page.pegawai');
+Route::get('/page/pegawai', [AdminPage::class, 'pegawai'])->middleware(['role:admin,pimpinan'])->name('page.pegawai');
 Route::get('/page/pegawai/{id}', [AdminPage::class, 'pegawaiDetail'])->middleware(['role:admin'])->name('page.pegawai.id');
 Route::get('/page/pegawai/{id}/create', [AdminPage::class, 'pegawaiCreate'])->middleware(['role:admin'])->name('page.pegawai.id.create');
 Route::get('/page/hafalan-surah', [AdminPage::class, 'pegawai'])->middleware(['role:admin'])->name('page.hafalan-surah');
-Route::get('/report/bbq', [AdminPage::class, 'reportBbq'])->middleware(['role:admin'])->name('report.bbq');
-Route::get('/report/pegawai', [AdminPage::class, 'pegawai'])->middleware(['role:admin'])->name('report.pegawai');
+Route::get('/report/bbq', [AdminPage::class, 'reportBbq'])->middleware(['role:admin,pimpinan'])->name('report.bbq');
+Route::get('/report/pegawai', [AdminPage::class, 'pegawai'])->middleware(['role:admin,pimpinan'])->name('report.pegawai');
+Route::get('download/portofolio/{id}', [PegawaiController::class, 'donwloadPegawaiId'])->name('download.pegawai')->middleware('auth');
 
 Route::post('/auth/pratinjau', [AuthController::class, 'pratinjauRegister'])->name('auth-pratinjau-create');
 Route::post('/auth/register', [AuthController::class, 'register'])->name('auth-create');
