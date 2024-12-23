@@ -116,8 +116,8 @@ class PegawaiController extends Controller
     if(!Storage::disk('public')->exists($imgaeFile)){
       $imgaeFile = 'images/user/aik/exsample.jpg';
     }
-    $extension = pathinfo(public_path($imgaeFile), PATHINFO_EXTENSION);
-    $pdf->Image(public_path($imgaeFile), 149, 10, 40, 47, $extension);
+    $extension = pathinfo(public_path("storage/".$imgaeFile), PATHINFO_EXTENSION);
+    $pdf->Image(public_path("storage/".$imgaeFile), 149, 10, 40, 47, $extension);
     $pdf->SetFont('Arial', 'B', 7);
     $pdf->Cell(27, 6, 'Nama Lengkap', 'LTRB', 0);
     $pdf->SetFont('Arial', '', 7);
