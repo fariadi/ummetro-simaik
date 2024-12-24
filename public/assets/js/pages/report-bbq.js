@@ -155,19 +155,14 @@ $(function () {
         search: '',
         searchPlaceholder: 'Search..'
       },
-      buttons: []
-      /*
-            buttons: [
-              {
-                text: '<i class="ti ti-plus me-0 me-sm-1 ti-xs"></i><span class="d-none d-sm-inline-block">Tambah Mahasiswa</span>',
-                className: 'modal-add-mhs btn btn-primary mx-3',
-                attr: {
-                  'data-bs-toggle': 'modal',
-                  'data-bs-target': '#modal-add-mhs'
-                }
-              }
-            ],
-            */
+      buttons: [{
+        text: '<i class="ti ti-plus me-0 me-sm-1 ti-xs"></i><span class="d-none d-sm-inline-block">Ekspor Excel</span>',
+        className: 'btn btn-warning mt-2 mb-2',
+        action: function ( e, dt, button, config ) {
+          window.location = baseUrl + 'download/bbq';
+        }   
+      }]
+          
     });
   }
 

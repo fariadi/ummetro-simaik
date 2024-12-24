@@ -82,6 +82,7 @@ Route::get('/page/hafalan-surah', [AdminPage::class, 'pegawai'])->middleware(['r
 Route::get('/report/bbq', [AdminPage::class, 'reportBbq'])->middleware(['role:admin,pimpinan'])->name('report.bbq');
 Route::get('/report/pegawai', [AdminPage::class, 'pegawai'])->middleware(['role:admin,pimpinan'])->name('report.pegawai');
 Route::get('download/portofolio/{id}', [PegawaiController::class, 'donwloadPegawaiId'])->name('download.pegawai')->middleware('auth');
+Route::get('download/bbq', [BbqregController::class, 'reportBbqExcel'])->middleware('auth');
 
 Route::post('/auth/pratinjau', [AuthController::class, 'pratinjauRegister'])->name('auth-pratinjau-create');
 Route::post('/auth/register', [AuthController::class, 'register'])->name('auth-create');
