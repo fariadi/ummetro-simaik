@@ -37,7 +37,7 @@ $configData = Helper::appClasses();
 
 @section('page-script')
 <script src="{{asset('assets/js/extended-ui-perfect-scrollbar.js')}}"></script>
-<script src="{{asset('assets/js/pages/report-bbq.js')}}"></script>
+<script src="{{asset('assets/js/pages/report-bbq.js?ver=1.1')}}"></script>
 @endsection
 
 @section('content')
